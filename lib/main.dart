@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:expressions/expressions.dart';
 
 void main() {
-  runApp(CalculatorApp());
+  runApp(Calculator());
 }
 
-class CalculatorApp extends StatelessWidget {
+class Calculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
