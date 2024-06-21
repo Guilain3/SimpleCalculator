@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expressions/expressions.dart';
+import 'dart:math';
 
 void main() {
   runApp(Calculator());
@@ -52,6 +53,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           _expression = _expression.substring(0, _expression.length - 1);
           _display = _expression.isEmpty ? "0" : _expression;
         }
+      } else if (buttonText == "√") {
+        try {
+          var result = sqrt(double.parse(_expression));
+          _display = result.toString();
+          _expression = _display;
+        } catch (e) {
+          _display = "Error";
+        }
+      } else if (buttonText == "^2") {
+        try {
+          var result = pow(double.parse(_expression), 2);
+          _display = result.toString();
+          _expression = _display;
+        } catch (e) {
+          _display = "Error";
+        }
       } else {
         _expression += buttonText;
         _display = _expression;
@@ -69,17 +86,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             foregroundColor: color,
             backgroundColor: Colors.grey[800],
             side: BorderSide(color: color, width: 1),
-            padding: buttonText == "X" ? EdgeInsets.all(24.0) : EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             textStyle: TextStyle(
-              fontSize: buttonText == "X" ? 20.0 : 24.0,
-              fontWeight: buttonText == "X" ? FontWeight.normal : FontWeight.bold,
-              fontFamily: 'Roboto',
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Times New Roman',
             ),
           ),
-          child: Text(
-            buttonText,
-            style: TextStyle(fontSize: buttonText == "X" ? 20.0 : 24.0),
-          ),
+          child: Text(buttonText),
         ),
       ),
     );
@@ -89,86 +103,96 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calculator', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+        title: Text('Calculator', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Times New Roman')),
         centerTitle: true,
       ),
-      body: 
-          Container(
-            padding: EdgeInsets.only(top: 64.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.bottomRight,
-                    padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
-                    child: Text(
-                      _display,
-                      style: TextStyle(
-                        fontSize: 48.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'Roboto',
+      body: Container(
+        padding: EdgeInsets.only(top: 64.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                alignment: Alignment.bottomRight,
+                padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.backspace, color: Colors.white),
+                      onPressed: () => _onButtonPressed("X"),
+                      iconSize: 30.0,
+                    ),
+                    Expanded(
+                      child: Text(
+                        _display,
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 48.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontFamily: 'Times New Roman',
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                Expanded(
-                  flex: 2,
-                  child: Column(
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton("7"),
-                          _buildButton("8"),
-                          _buildButton("9"),
-                          _buildButton("/", color: Colors.white),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton("4"),
-                          _buildButton("5"),
-                          _buildButton("6"),
-                          _buildButton("*", color: Colors.white),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton("1"),
-                          _buildButton("2"),
-                          _buildButton("3"),
-                          _buildButton("-", color: Colors.white),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton(".", color: Colors.white),
-                          _buildButton("0"),
-                          _buildButton("+", color: Colors.white),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildButton("C", color: Colors.red),
-                          _buildButton("=", color: Colors.green),
-                          _buildButton("X"),
-                        ],
-                      ),
+                      _buildButton("C", color: Colors.red),
+                      _buildButton("√", color: Colors.blue),
+                      _buildButton("^2", color: Colors.blue),
+                      _buildButton("/", color: Colors.white),
                     ],
                   ),
-                ),
-              ],
-             ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildButton("7"),
+                      _buildButton("8"),
+                      _buildButton("9"),
+                      _buildButton("*", color: Colors.white),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildButton("4"),
+                      _buildButton("5"),
+                      _buildButton("6"),
+                      _buildButton("-", color: Colors.white),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildButton("1"),
+                      _buildButton("2"),
+                      _buildButton("3"),
+                      _buildButton("+", color: Colors.white),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildButton("."),
+                      _buildButton("0"),
+                      _buildButton("=", color: Colors.green),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
-          
-      
-    
   }
 }
