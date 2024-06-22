@@ -92,6 +92,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               fontWeight: FontWeight.bold,
               fontFamily: 'Times New Roman',
             ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
           ),
           child: Text(buttonText),
         ),
