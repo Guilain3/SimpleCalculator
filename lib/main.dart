@@ -3,10 +3,10 @@ import 'package:expressions/expressions.dart';
 import 'dart:math';
 
 void main() {
-  runApp(Calculator());
+  runApp(MyApp());
 }
 
-class Calculator extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +19,58 @@ class Calculator extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: CalculatorScreen(),
+      home: WelcomeScreen(),
+    );
+  }
+}
+
+class WelcomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Welcome',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'Times New Roman'),
+        ),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Hello!',
+              style: TextStyle(
+                fontSize: 48.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: 'Times New Roman',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CalculatorScreen()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12), backgroundColor: Colors.blue,
+                textStyle: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Times New Roman',
+                ),               ),
+              child: Text('Go to Calculator'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -106,7 +157,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Calculator', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Times New Roman')),
+        title: Text('Calculator',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: 'Times New Roman')),
         centerTitle: true,
       ),
       body: Container(
@@ -117,7 +172,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             Expanded(
               child: Container(
                 alignment: Alignment.bottomRight,
-                padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
+                padding:
+                    EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
