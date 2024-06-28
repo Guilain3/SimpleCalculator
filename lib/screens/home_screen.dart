@@ -32,34 +32,44 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('App Menu'),
+        title: Text(
+          'App Menu',
+          style: TextStyle(color: Colors.white), // Set the title color to white
+        ),
+        backgroundColor: Colors.blue, // Optional: Change the AppBar background color to blue
       ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Menu'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
+        child: Container(
+          color: Colors.blue, // Set the drawer background color
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text(
+                  'Menu',
+                  style: TextStyle(color: Colors.white),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.login),
-              title: Text('Sign In'),
-              onTap: () => _onDrawerItemTapped(0),
-            ),
-            ListTile(
-              leading: Icon(Icons.app_registration),
-              title: Text('Sign Up'),
-              onTap: () => _onDrawerItemTapped(1),
-            ),
-            ListTile(
-              leading: Icon(Icons.calculate),
-              title: Text('Calculator'),
-              onTap: () => _onDrawerItemTapped(2),
-            ),
-          ],
+              ListTile(
+                leading: Icon(Icons.login, color: Colors.white),
+                title: Text('Sign In', style: TextStyle(color: Colors.white)),
+                onTap: () => _onDrawerItemTapped(0),
+              ),
+              ListTile(
+                leading: Icon(Icons.app_registration, color: Colors.white),
+                title: Text('Sign Up', style: TextStyle(color: Colors.white)),
+                onTap: () => _onDrawerItemTapped(1),
+              ),
+              ListTile(
+                leading: Icon(Icons.calculate, color: Colors.white),
+                title: Text('Calculator', style: TextStyle(color: Colors.white)),
+                onTap: () => _onDrawerItemTapped(2),
+              ),
+            ],
+          ),
         ),
       ),
       body: _screens[_selectedIndex],
