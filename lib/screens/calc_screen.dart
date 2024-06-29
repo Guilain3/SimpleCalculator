@@ -94,24 +94,18 @@ class _CalcScreenState extends State<CalcScreen> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        padding: EdgeInsets.only(top: 64.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                alignment: Alignment.bottomRight,
-                padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.backspace, color: Colors.white),
-                      onPressed: () => onButtonClick("X"),
-                      iconSize: 30.0,
-                    ),
-                    Expanded(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomRight,
+                      padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
                       child: Text(
                         displayValue,
                         textAlign: TextAlign.right,
@@ -123,13 +117,16 @@ class _CalcScreenState extends State<CalcScreen> {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.backspace, color: Colors.orange),
+                    onPressed: () => onButtonClick("X"),
+                    iconSize: 30.0,
+                  ),
+                ],
               ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Column(
+              SizedBox(height: 20.0),
+              Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -137,7 +134,7 @@ class _CalcScreenState extends State<CalcScreen> {
                       buildCalcButton("C", color: Colors.red),
                       buildCalcButton("√", color: Colors.blue),
                       buildCalcButton("^2", color: Colors.blue),
-                      buildCalcButton("/", color: Colors.white),
+                      buildCalcButton("/", color: Colors.blue),
                     ],
                   ),
                   Row(
@@ -146,7 +143,7 @@ class _CalcScreenState extends State<CalcScreen> {
                       buildCalcButton("7"),
                       buildCalcButton("8"),
                       buildCalcButton("9"),
-                      buildCalcButton("*", color: Colors.white),
+                      buildCalcButton("*", color: Colors.blue),
                     ],
                   ),
                   Row(
@@ -155,7 +152,7 @@ class _CalcScreenState extends State<CalcScreen> {
                       buildCalcButton("4"),
                       buildCalcButton("5"),
                       buildCalcButton("6"),
-                      buildCalcButton("-", color: Colors.white),
+                      buildCalcButton("-", color: Colors.blue),
                     ],
                   ),
                   Row(
@@ -164,7 +161,7 @@ class _CalcScreenState extends State<CalcScreen> {
                       buildCalcButton("1"),
                       buildCalcButton("2"),
                       buildCalcButton("3"),
-                      buildCalcButton("+", color: Colors.white),
+                      buildCalcButton("+", color: Colors.blue),
                     ],
                   ),
                   Row(
@@ -177,8 +174,8 @@ class _CalcScreenState extends State<CalcScreen> {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
